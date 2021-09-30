@@ -4,11 +4,18 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import style from 'components/calendar/calendarHeader/CalendarHeader.module.scss';
 
 type Props = {
+  canGoNext?: boolean;
+  canGoPrev?: boolean;
   onPrevClick(): void;
   onNextClick(): void;
 };
 
-const CalendarHeader: FC<Props> = ({ onPrevClick, onNextClick }) => {
+const CalendarHeader: FC<Props> = ({
+  canGoNext = true,
+  canGoPrev = true,
+  onPrevClick,
+  onNextClick,
+}) => {
   return (
     <div className={style.header}>
       <span>Header title</span>
@@ -17,6 +24,7 @@ const CalendarHeader: FC<Props> = ({ onPrevClick, onNextClick }) => {
           <Button
             type="primary"
             shape="circle"
+            disabled={!canGoPrev}
             onClick={onPrevClick}
             icon={<LeftOutlined />}
           />
@@ -25,6 +33,7 @@ const CalendarHeader: FC<Props> = ({ onPrevClick, onNextClick }) => {
           <Button
             type="primary"
             shape="circle"
+            disabled={!canGoNext}
             onClick={onNextClick}
             icon={<RightOutlined />}
           />

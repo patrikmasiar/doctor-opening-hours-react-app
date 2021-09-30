@@ -12,15 +12,24 @@ export const useCalendar = () => {
 
   const goToPreviousWeek = () => {
     setWeek(prevWeek => {
+      if (!canGoPrev) {
+        return prevWeek;
+      }
+
       return prevWeek - 1;
     })
   };
+
+  const canGoPrev = useMemo(() => {
+    return week > getNumberOfTheWeek();
+  }, [week])
 
   const weekDates = useMemo(() => {
     return getDaysInWeek(week);
   }, [week])
 
   return {
+    canGoPrev,
     weekDates,
     goToNextWeek,
     goToPreviousWeek,

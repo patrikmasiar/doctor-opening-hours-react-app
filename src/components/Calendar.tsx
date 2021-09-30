@@ -4,13 +4,15 @@ import CalendarHeader from './calendar/CalendarHeader';
 import WeekDays from './calendar/WeekDays';
 
 const Calendar: FC = () => {
-  const { weekDates, goToNextWeek, goToPreviousWeek } = useCalendar();
+  const { canGoPrev, weekDates, goToNextWeek, goToPreviousWeek } =
+    useCalendar();
 
   return (
     <div>
       <CalendarHeader
         onNextClick={goToNextWeek}
         onPrevClick={goToPreviousWeek}
+        canGoPrev={canGoPrev}
       />
       <WeekDays dates={weekDates} />
     </div>
