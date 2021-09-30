@@ -1,3 +1,6 @@
+# Doctor opening hours and booking - React application
+[![](https://github.com/patrikmasiar/doctor-opening-hours-react-app/workflows/Build/badge.svg)](https://github.com/patrikmasiar/doctor-opening-hours-react-app/actions)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
