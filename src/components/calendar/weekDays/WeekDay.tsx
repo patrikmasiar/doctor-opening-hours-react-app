@@ -1,8 +1,20 @@
+import moment from 'moment';
 import { FC } from 'react';
 
-const WeekDay: FC = () => {
+type Props = {
+  date: string;
+};
+
+const WeekDay: FC<Props> = ({ date }) => {
   return (
-    <div />
+    <div>
+      <div>
+        {moment(date).format('DD.MM.YYYY')}
+      </div>
+      <div>
+        terms
+      </div>
+    </div>
   )
 };
 

@@ -4,7 +4,7 @@ import CalendarHeader from './calendar/CalendarHeader';
 import WeekDays from './calendar/WeekDays';
 
 const Calendar: FC = () => {
-  const { week, goToNextWeek, goToPreviousWeek } = useCalendar();
+  const { week, weekDates, goToNextWeek, goToPreviousWeek } = useCalendar();
 
   return (
     <div>
@@ -13,7 +13,7 @@ const Calendar: FC = () => {
         onNextClick={goToNextWeek}
         onPrevClick={goToPreviousWeek}
       />
-      <WeekDays />
+      <WeekDays dates={weekDates} />
     </div>
   );
 };

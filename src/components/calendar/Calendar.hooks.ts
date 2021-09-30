@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { getNumberOfTheWeek } from "utils/dates";
+import { useState, useMemo } from 'react';
+import { getDaysInWeek, getNumberOfTheWeek } from "utils/dates";
 
 export const useCalendar = () => {
   const [week, setWeek] = useState(getNumberOfTheWeek());
@@ -16,8 +16,13 @@ export const useCalendar = () => {
     })
   };
 
+  const weekDates = useMemo(() => {
+    return getDaysInWeek(week);
+  }, [week])
+
   return {
     week,
+    weekDates,
     goToNextWeek,
     goToPreviousWeek,
   };

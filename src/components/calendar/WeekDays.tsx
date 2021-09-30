@@ -1,8 +1,22 @@
 import { FC } from 'react';
+import WeekDay from './weekDays/WeekDay';
 
-const WeekDays: FC = () => {
+type Props = {
+  dates: string[];
+}
+
+const WeekDays: FC<Props> = ({ dates }) => {
   return (
-    <div />
+    <div>
+      {dates.map(date => {
+        return (
+          <WeekDay
+            key={date}
+            date={date}
+          />
+        )
+      })}
+    </div>
   )
 };
 
