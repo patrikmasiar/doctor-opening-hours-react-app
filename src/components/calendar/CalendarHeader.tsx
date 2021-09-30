@@ -4,15 +4,14 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import style from 'components/calendar/calendarHeader/CalendarHeader.module.scss';
 
 type Props = {
-  week: number;
   onPrevClick(): void;
   onNextClick(): void;
 };
 
-const CalendarHeader: FC<Props> = ({ week, onPrevClick, onNextClick }) => {
+const CalendarHeader: FC<Props> = ({ onPrevClick, onNextClick }) => {
   return (
     <div className={style.header}>
-      <span>Current week: {week}</span>
+      <span>Header title</span>
       <div>
         <Button
           type="primary"

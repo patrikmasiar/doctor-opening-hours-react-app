@@ -21,7 +21,6 @@ export const useCalendar = () => {
   }, [week])
 
   return {
-    week,
     weekDates,
     goToNextWeek,
     goToPreviousWeek,
