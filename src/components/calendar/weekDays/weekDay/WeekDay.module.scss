@@ -1,0 +1,35 @@
+.item {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+
+  .info {
+    padding: 8px;
+    width: 100px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+
+    & > span:nth-child(1) {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    & > span:nth-child(2) {
+      font-weight: b100;
+      font-size: 14px;
+    }
+  }
+
+  .terms {
+    margin-left: 12px;
+    width: 100%;
+    padding: 8px;
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  & + .item {
+    border-top: 1px solid gray;
+  }
+}
