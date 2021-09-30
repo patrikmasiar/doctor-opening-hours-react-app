@@ -1,18 +1,16 @@
-import { Layout } from 'antd';
 import { FC } from 'react';
-import Calendar from 'components/Calendar';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-const { Header, Content } = Layout;
+import Main from 'pages/Main';
+
 
 const App: FC = () => {
   return (
-    <Layout>
-      <Header>Header</Header>
-      <Content style={{ padding: '50px' }}>
-        <Calendar />
-      </Content>
-      {/* <Footer>Footer</Footer> */}
-    </Layout>
+    <BrowserRouter basename="/">
+      <Switch>
+        <Route path="/" component={Main} />
+      </Switch>
+    </BrowserRouter>
   );
 };
 
