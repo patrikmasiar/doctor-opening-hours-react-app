@@ -23,7 +23,7 @@ export const useWeekDay = (day: number) => {
     const range = times.map(item => {
       const [hour, minute] = item;
 
-      return `${hour}:${minute === 0 ? '00' : minute}`;
+      return `${hour.toString().padStart(2, '0')}:${minute === 0 ? '00' : minute}`;
     }).filter((_, index, arr) => {
       return index !== arr.length - 1;
     });
@@ -32,7 +32,7 @@ export const useWeekDay = (day: number) => {
 
     range.forEach((_, index) => {
       output.push({
-        start: range[index].padStart(2, '0'),
+        start: range[index],
         end: range[index + 1],
         isOccupied: false,
         isPause: false,

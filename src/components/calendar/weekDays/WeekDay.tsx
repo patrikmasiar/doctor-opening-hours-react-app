@@ -2,6 +2,7 @@ import moment from 'moment';
 import { FC } from 'react';
 import style from 'components/calendar/weekDays/weekDay/WeekDay.module.scss';
 import { useWeekDay } from './weekDay/WeekDay.hooks';
+import Term from 'components/Term';
 
 type Props = {
   date: string;
@@ -10,8 +11,6 @@ type Props = {
 
 const WeekDay: FC<Props> = ({ date, dayNumber }) => {
   const {terms} = useWeekDay(dayNumber);
-
-  console.log(terms)
 
   return (
     <div className={style.item}>
@@ -24,7 +23,14 @@ const WeekDay: FC<Props> = ({ date, dayNumber }) => {
         </span>
       </div>
       <div className={style.terms}>
-        terms
+        {terms.map(term => {
+          return (
+            <Term
+              title={`${term.start} - ${term.end}`}
+              isOccupied={term.isOccupied}
+            />
+          )
+        })}
       </div>
     </div>
   )
