@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 const DAY_NAMES = [
   'monday',
@@ -15,7 +15,22 @@ export const getNumberOfTheWeek = (): number => {
 };
 
 export const getDaysInWeek = (week: number) => {
-  return DAY_NAMES.map((day) => (
-    moment().day(day).isoWeek(week).format('YYYY-MM-DD')
-  ));
+  return DAY_NAMES.map((day) =>
+    moment().day(day).isoWeek(week).format('YYYY-MM-DD'),
+  );
+};
+
+export const getRandomDate = (start: Moment, end: Moment) => {
+  const endTime = +moment(end);
+  const startTime = +moment(start);
+
+  if (startTime > endTime) {
+    throw new Error('Start date is after end date');
+  }
+
+  const randomNumber = Math.floor(
+    Math.random() * (endTime - startTime) + startTime,
+  );
+
+  return moment(randomNumber);
 };
