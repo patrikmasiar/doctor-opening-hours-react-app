@@ -38,7 +38,7 @@ export const useWeekDay = (day: number) => {
       output.push({
         start: range[index],
         end: range[index + 1],
-        isOccupied: false,
+        isOccupied: index % 2 === 0,
         isPause: false,
       });
     });

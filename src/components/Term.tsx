@@ -10,7 +10,9 @@ type Props = {
 const Term: FC<Props> = ({ title, isOccupied }) => {
   return (
     <div className={classes(style.term, isOccupied && style.occupiedTerm)}>
-      {title}
+      <span className={style.title}>
+        {title}
+      </span>
     </div>
   );
 };
