@@ -8,10 +8,11 @@ type Props = {
 const WeekDays: FC<Props> = ({ dates }) => {
   return (
     <div>
-      {dates.map(date => {
+      {dates.map((date, index) => {
         return (
           <WeekDay
             key={date}
+            dayNumber={index + 1}
             date={date}
           />
         )
