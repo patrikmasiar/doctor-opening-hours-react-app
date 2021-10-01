@@ -1,32 +1,48 @@
-import moment from 'moment';
-import { useEffect, useState } from 'react';
+type DayTerm = {
+  start: string;
+  end: string;
+  isOccupied: boolean;
+  isPause: boolean;
+}
 
 export const useWeekDay = (day: number) => {
   const isEven = () => {
     return day % 2 === 0;
   }
 
-  const getTerms = () => {
-    const terms = [];
-    const startTime = isEven() ? 8 : 13;
-    const endTime =  isEven() ? 14 : 19;
-    let index = 0;
+  const getAllDayTerms = () => {
+    const times: any[] = [];
+    const start = isEven() ? 8 : 13;
+    const end =  isEven() ? 14 : 19;
 
-    for (let i = startTime; i <= endTime; i++) {
-      const lastItem: {start: any, end: any} = terms[terms.length - 1] ?? {start: null, end: null,};
-
-      terms.push({
-        start: terms.length === 0 ? `${i}-00` : lastItem.end,
-        end: index % 2 === 0 ? `${i}-30` : `${i}-00`,
-      });
-
-      index++;
+    for (var hour = start; hour <= end; hour++) {
+      times.push([hour, 0]);
+      times.push([hour, 30]);
     }
 
-    return terms;
+    const range = times.map(item => {
+      const [hour, minute] = item;
+
+      return `${hour}:${minute === 0 ? '00' : minute}`;
+    }).filter((_, index, arr) => {
+      return index !== arr.length - 1;
+    });
+
+    const output: DayTerm[] = [];
+
+    range.forEach((_, index) => {
+      output.push({
+        start: range[index].padStart(2, '0'),
+        end: range[index + 1],
+        isOccupied: false,
+        isPause: false,
+      });
+    })
+
+    return output.filter(item => !!item.start && !!item.end);
   };
 
   return {
-    terms: getTerms(),
+    terms: getAllDayTerms(),
   }
 };
