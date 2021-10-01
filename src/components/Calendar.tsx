@@ -7,7 +7,7 @@ import { useTerms } from 'components/term/Term.hooks';
 import style from 'components/calendar/Calendar.module.scss';
 
 const Calendar: FC = () => {
-  const { isLoading } = useTerms();
+  const { isLoading, occupiedItems } = useTerms();
   const { canGoPrev, weekDates, goToNextWeek, goToPreviousWeek } =
     useCalendar();
 
@@ -18,7 +18,7 @@ const Calendar: FC = () => {
         onPrevClick={goToPreviousWeek}
         canGoPrev={canGoPrev}
       />
-      <WeekDays dates={weekDates} />
+      <WeekDays dates={weekDates} occupiedItems={occupiedItems} />
       {isLoading && (
         <div className={style.loader}>
           <Spin />

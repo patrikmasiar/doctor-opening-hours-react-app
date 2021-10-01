@@ -1,12 +1,17 @@
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 
 type DayTerm = {
   start: string;
   end: string;
+  isOccupied: boolean;
   isPause: boolean;
 };
 
-export const useWeekDay = (day: number) => {
+export const useWeekDay = (
+  date: string,
+  day: number,
+  occupiedItems: Moment[],
+) => {
   const isEven = () => {
     return day % 2 === 0;
   };
@@ -39,6 +44,12 @@ export const useWeekDay = (day: number) => {
       output.push({
         start: range[index],
         end: range[index + 1],
+        isOccupied: occupiedItems.some((item) =>
+          item.isBetween(
+            moment(`${date} ${range[index]}`),
+            moment(`${date} ${range[index + 1]}`),
+          ),
+        ),
         isPause: false,
       });
     });
@@ -46,12 +57,7 @@ export const useWeekDay = (day: number) => {
     return output.filter((item) => !!item.start && !!item.end);
   };
 
-  const isOccupied = (date: Moment, range: { from: string; to: string }) => {
-    return false;
-  };
-
   return {
     terms: getAllDayTerms(),
-    isOccupied,
   };
 };

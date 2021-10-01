@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { FC } from 'react';
 import style from 'components/calendar/weekDays/weekDay/WeekDay.module.scss';
 import { useWeekDay } from './weekDay/WeekDay.hooks';
@@ -7,10 +7,11 @@ import Term from 'components/Term';
 type Props = {
   date: string;
   dayNumber: number;
+  occupiedItems: Moment[];
 };
 
-const WeekDay: FC<Props> = ({ date, dayNumber }) => {
-  const { terms, isOccupied } = useWeekDay(dayNumber);
+const WeekDay: FC<Props> = ({ date, dayNumber, occupiedItems }) => {
+  const { terms } = useWeekDay(date, dayNumber, occupiedItems);
 
   return (
     <div className={style.item}>
@@ -24,10 +25,7 @@ const WeekDay: FC<Props> = ({ date, dayNumber }) => {
             <Term
               key={`${term.start}-${term.end}-${index}`}
               title={`${term.start} - ${term.end}`}
-              isOccupied={isOccupied(moment(date), {
-                from: term.start,
-                to: term.end,
-              })}
+              isOccupied={term.isOccupied}
             />
           );
         })}
