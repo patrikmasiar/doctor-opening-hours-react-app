@@ -1,7 +1,8 @@
+import { Moment } from 'moment';
+
 type DayTerm = {
   start: string;
   end: string;
-  isOccupied: boolean;
   isPause: boolean;
 };
 
@@ -38,7 +39,6 @@ export const useWeekDay = (day: number) => {
       output.push({
         start: range[index],
         end: range[index + 1],
-        isOccupied: index % 2 === 0,
         isPause: false,
       });
     });
@@ -46,7 +46,12 @@ export const useWeekDay = (day: number) => {
     return output.filter((item) => !!item.start && !!item.end);
   };
 
+  const isOccupied = (date: Moment, range: { from: string; to: string }) => {
+    return false;
+  };
+
   return {
     terms: getAllDayTerms(),
+    isOccupied,
   };
 };
