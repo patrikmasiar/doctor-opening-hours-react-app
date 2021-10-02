@@ -1,16 +1,48 @@
 import React, { FC, useState, useContext } from 'react';
 
-// @ts-ignore we do not need to implement default value
-const AppContext = React.createContext<{}>({});
+const AppContext = React.createContext<{
+  state: {
+    reservations: any[];
+  };
+  actions: {
+    createReservation(params: {
+      date: string;
+      start: string;
+      end: string;
+    }): void;
+  };
+  // @ts-ignore
+}>({});
 
 type Props = {
   children: React.ReactNode;
 };
 
 export const AppContextProvider: FC<Props> = ({ children }) => {
-  const [state, setState] = useState({});
+  const [state, setState] = useState({
+    reservations: [],
+  });
 
-  return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
+  const createReservation = (params: {
+    date: string;
+    start: string;
+    end: string;
+  }) => {
+    console.log('reservation', params);
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
+        state,
+        actions: {
+          createReservation,
+        },
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export const useAppContext = () => {
