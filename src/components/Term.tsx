@@ -10,10 +10,10 @@ type Props = {
 };
 
 const Term: FC<Props> = ({ term, date }) => {
-  const isInPast =
-    moment(date).diff(moment(), 'day') < 0 ||
-    date === moment().format('YYYY-MM-DD');
-  const isDisabled = term.isOccupied || term.isLunchBreak || isInPast;
+  const isInPast = moment(date).diff(moment(), 'day') < 0;
+  const isToday = date === moment().format('YYYY-MM-DD');
+  const isDisabled =
+    term.isOccupied || term.isLunchBreak || isInPast || isToday;
 
   return (
     <Link
@@ -31,7 +31,7 @@ const Term: FC<Props> = ({ term, date }) => {
         className={classes(
           style.term,
           term.isOccupied && style.occupiedTerm,
-          (term.isLunchBreak || isInPast) && style.lunchBreakTerm,
+          (term.isLunchBreak || isInPast || isToday) && style.lunchBreakTerm,
         )}
       >
         <span className={style.title}>
