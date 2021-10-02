@@ -24,8 +24,7 @@ const WeekDay: FC<Props> = ({ date, dayNumber, occupiedItems }) => {
           return (
             <Term
               key={`${term.start}-${term.end}-${index}`}
-              title={`${term.start} - ${term.end}`}
-              isOccupied={term.isOccupied}
+              term={term}
             />
           );
         })}

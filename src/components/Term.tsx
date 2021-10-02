@@ -4,20 +4,21 @@ import style from 'components/term/Term.module.scss';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  isOccupied: boolean;
-  title: string;
+  term: any; // TODO: type
 };
 
-const Term: FC<Props> = ({ title, isOccupied }) => {
+const Term: FC<Props> = ({ term }) => {
   return (
     <Link
-      to={{
+      to={!term.isOccupied ? {
         pathname: 'reservation',
-      }}
-      className={style.termLink}
+      } : ''}
+      className={classes(style.termLink, term.isOccupied && style.linkDisabled)}
     >
-      <div className={classes(style.term, isOccupied && style.occupiedTerm)}>
-        <span className={style.title}>{title}</span>
+      <div
+        className={classes(style.term, term.isOccupied && style.occupiedTerm)}
+      >
+        <span className={style.title}>{`${term.start} - ${term.end}`}</span>
       </div>
     </Link>
   );
