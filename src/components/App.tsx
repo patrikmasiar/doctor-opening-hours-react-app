@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Breadcrumb, Layout } from 'antd';
+import { AppContextProvider } from 'store';
 
 import Main from 'pages/Main';
 import Reservation from 'pages/Reservation';
@@ -16,10 +17,12 @@ const App: FC = () => {
           <Breadcrumb.Item>Home</Breadcrumb.Item>
         </Breadcrumb>
         <Content style={{ padding: 50 }}>
-          <Switch>
-            <Route path="/" component={Main} exact />
-            <Route path="/reservation" component={Reservation} exact />
-          </Switch>
+          <AppContextProvider>
+            <Switch>
+              <Route path="/" component={Main} exact />
+              <Route path="/reservation" component={Reservation} exact />
+            </Switch>
+          </AppContextProvider>
         </Content>
         {/* <Footer>Footer</Footer> */}
       </Layout>

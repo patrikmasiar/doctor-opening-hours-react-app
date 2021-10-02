@@ -1,10 +1,9 @@
+import ReservationForm from 'components/ReservationForm';
 import { FC } from 'react';
 
 const Reservation: FC = () => {
   return (
-    <div>
-      Reservation
-    </div>
+    <ReservationForm />
   );
 };
 
