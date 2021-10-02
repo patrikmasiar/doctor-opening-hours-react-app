@@ -5,15 +5,17 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   term: any; // TODO: type
+  date: string;
 };
 
-const Term: FC<Props> = ({ term }) => {
+const Term: FC<Props> = ({ term, date }) => {
   return (
     <Link
       to={
         !term.isOccupied && !term.isLunchBreak
           ? {
               pathname: 'reservation',
+              search: `?date=${date}&start=${term.start}&end=${term.end}`,
             }
           : ''
       }
