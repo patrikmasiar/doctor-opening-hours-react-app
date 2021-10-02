@@ -4,7 +4,7 @@ type DayTerm = {
   start: string;
   end: string;
   isOccupied: boolean;
-  isPause: boolean;
+  isLunchBreak: boolean;
 };
 
 export const useWeekDay = (
@@ -14,6 +14,14 @@ export const useWeekDay = (
 ) => {
   const isEven = () => {
     return day % 2 === 0;
+  };
+
+  const isLunchBreak = (start: string, end: string) => {
+    if (isEven()) {
+      return start === '11:00' && end === '11:30';
+    }
+
+    return start === '16:00' && end === '16:30';
   };
 
   const getAllDayTerms = () => {
@@ -50,7 +58,7 @@ export const useWeekDay = (
             moment(`${date} ${range[index + 1]}`),
           ),
         ),
-        isPause: false,
+        isLunchBreak: isLunchBreak(range[index], range[index + 1]),
       });
     });
 

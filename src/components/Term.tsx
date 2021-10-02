@@ -10,15 +10,29 @@ type Props = {
 const Term: FC<Props> = ({ term }) => {
   return (
     <Link
-      to={!term.isOccupied ? {
-        pathname: 'reservation',
-      } : ''}
-      className={classes(style.termLink, term.isOccupied && style.linkDisabled)}
+      to={
+        !term.isOccupied && !term.isLunchBreak
+          ? {
+              pathname: 'reservation',
+            }
+          : ''
+      }
+      className={classes(
+        style.termLink,
+        (term.isOccupied || term.isLunchBreak) && style.linkDisabled,
+      )}
     >
       <div
-        className={classes(style.term, term.isOccupied && style.occupiedTerm)}
+        className={classes(
+          style.term,
+          term.isOccupied && style.occupiedTerm,
+          term.isLunchBreak && style.lunchBreakTerm,
+        )}
       >
-        <span className={style.title}>{`${term.start} - ${term.end}`}</span>
+        <span className={style.title}>
+          {`${term.start} - ${term.end}`}
+          {term.isLunchBreak && ' LUNCH BREAK'}
+        </span>
       </div>
     </Link>
   );
