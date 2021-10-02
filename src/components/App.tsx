@@ -17,8 +17,8 @@ const App: FC = () => {
         </Breadcrumb>
         <Content style={{ padding: 50 }}>
           <Switch>
-            <Route path="/" component={Main} />
-            <Route path="/reservation" component={Reservation} />
+            <Route path="/" component={Main} exact />
+            <Route path="/reservation" component={Reservation} exact />
           </Switch>
         </Content>
         {/* <Footer>Footer</Footer> */}

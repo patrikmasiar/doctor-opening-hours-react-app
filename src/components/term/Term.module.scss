@@ -1,27 +1,32 @@
-.term {
-  background-color: lightgreen;
-  padding: 4px;
-  border-radius: 4px;
-  border: 1px solid green;
-  cursor: pointer;
-  outline: none;
-  user-select: none;
-
-  .title {
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  & + .term {
+.termLink {
+  display: block;
+  
+  & + .termLink {
     margin-top: 4px;
   }
 
-  &:hover {
-    opacity: 0.7;
+  .term {
+    background-color: lightgreen;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid green;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+  
+    .title {
+      font-weight: 600;
+      font-size: 12px;
+    }
+  
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  
+  .occupiedTerm {
+    background-color: lightpink;
+    border-color: red;
   }
 }
 
-.occupiedTerm {
-  background-color: lightpink;
-  border-color: red;
-}
