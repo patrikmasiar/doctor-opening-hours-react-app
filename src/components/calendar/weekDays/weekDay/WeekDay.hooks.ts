@@ -1,5 +1,4 @@
 import moment, { Moment } from 'moment';
-import { getQueryParameters } from 'utils/url';
 import { isDayClosed } from './WeekDay.utils';
 
 type DayTerm = {

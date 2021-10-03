@@ -5,7 +5,7 @@ const AppContext = React.createContext<{
     reservations: any[];
   };
   actions: {
-    createReservation(params: {
+    createReservation(reservation: {
       date: string;
       start: string;
       end: string;
@@ -19,16 +19,33 @@ type Props = {
 };
 
 export const AppContextProvider: FC<Props> = ({ children }) => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<{
+    reservations: {
+      date: string;
+      start: string;
+      end: string;
+    }[];
+  }>({
     reservations: [],
   });
 
-  const createReservation = (params: {
+  const createReservation = (reservation: {
     date: string;
     start: string;
     end: string;
   }) => {
-    console.log('reservation', params);
+    // validation
+
+    setState((prevState) => {
+      const reservations = [...prevState.reservations];
+
+      reservations.push(reservation);
+
+      return {
+        ...prevState,
+        reservations,
+      };
+    });
   };
 
   return (
