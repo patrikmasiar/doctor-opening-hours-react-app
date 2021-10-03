@@ -4,6 +4,7 @@ import style from 'components/calendar/weekDays/weekDay/WeekDay.module.scss';
 import { useWeekDay } from './weekDay/WeekDay.hooks';
 import Term from 'components/Term';
 import { Reservation } from 'store';
+import { Alert } from 'antd';
 
 type Props = {
   date: string;
@@ -33,7 +34,10 @@ const WeekDay: FC<Props> = ({
       </div>
       <div className={style.terms}>
         {isClosed ? (
-          <div>Closed</div>
+          <Alert
+            message="The ambulance is closed today"
+            type="warning"
+          />
         ) : (
           <>
             {terms.map((term, index) => {
