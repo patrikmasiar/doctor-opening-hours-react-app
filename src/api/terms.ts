@@ -39,9 +39,6 @@ export const generateAndLoadOccupiedTerms = (): Promise<Moment[]> => {
       }
     });
 
-    console.log(dates)
-    console.log(dates.map(item => item.format('YYYY-MM-DD hh:mm')));
-
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(dates);
