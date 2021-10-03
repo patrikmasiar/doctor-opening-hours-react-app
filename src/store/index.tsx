@@ -1,4 +1,5 @@
 import { generateAndLoadOccupiedTerms } from 'api/terms';
+import { validateCreateReservation } from 'components/reservationForm/ReservationForm.utils';
 import { Moment } from 'moment';
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -52,20 +53,29 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
   };
 
   const createReservation = (reservation: Reservation) => {
-    // validation
+    const { reservations, occupiedTerms } = state;
 
-    setState((prevState) => {
-      const reservations = [...prevState.reservations];
-
-      reservations.push(reservation);
-
-      return {
-        ...prevState,
-        reservations,
-      };
+    const validationMessage = validateCreateReservation(reservation, {
+      reservations,
+      occupiedItems: occupiedTerms,
     });
 
-    history.goBack();
+    if (validationMessage === 'OK') {
+      setState((prevState) => {
+        const reservations = [...prevState.reservations];
+
+        reservations.push(reservation);
+
+        return {
+          ...prevState,
+          reservations,
+        };
+      });
+
+      history.goBack();
+    } else {
+      alert(validationMessage);
+    }
   };
 
   return (
