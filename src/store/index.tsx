@@ -3,6 +3,12 @@ import { Moment } from 'moment';
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
+export type Reservation = {
+  date: string;
+  start: string;
+  end: string;
+};
+
 const AppContext = React.createContext<{
   state: {
     reservations: any[];
@@ -10,11 +16,7 @@ const AppContext = React.createContext<{
     occupiedTerms: Moment[];
   };
   actions: {
-    createReservation(reservation: {
-      date: string;
-      start: string;
-      end: string;
-    }): void;
+    createReservation(reservation: Reservation): void;
   };
   // @ts-ignore
 }>({});
@@ -25,11 +27,7 @@ type Props = {
 
 export const AppContextProvider: FC<Props> = ({ children }) => {
   const [state, setState] = useState<{
-    reservations: {
-      date: string;
-      start: string;
-      end: string;
-    }[];
+    reservations: Reservation[];
     isLoadingTerms: boolean;
     occupiedTerms: Moment[];
   }>({
@@ -53,11 +51,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
     }));
   };
 
-  const createReservation = (reservation: {
-    date: string;
-    start: string;
-    end: string;
-  }) => {
+  const createReservation = (reservation: Reservation) => {
     // validation
 
     setState((prevState) => {
