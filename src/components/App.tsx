@@ -7,7 +7,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import Main from 'pages/Main';
 import Reservation from 'pages/Reservation';
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const App: FC = () => {
   return (
@@ -23,7 +23,20 @@ const App: FC = () => {
             </Switch>
           </AppContextProvider>
         </Content>
-        {/* <Footer>Footer</Footer> */}
+        <Footer>
+          Made with ❤️ by{' '}
+          <a href="https://patrikmasiar.com" target="_blank" rel="noreferrer">
+            Patrik Mäsiar
+          </a>
+          ,{' '}
+          <a
+            href="https://github.com/patrikmasiar"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Github:
+          </a>
+        </Footer>
       </Layout>
     </BrowserRouter>
   );
