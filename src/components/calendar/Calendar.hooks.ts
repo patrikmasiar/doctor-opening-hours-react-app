@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useState, useMemo, useEffect } from 'react';
 import { getDaysInWeek, getNumberOfTheWeek } from 'utils/dates';
 import { getQueryParameters, setQueryParameter } from 'utils/url';
@@ -16,6 +17,10 @@ export const useCalendar = () => {
 
     if (!!queryParams.week) {
       weekNumber = Number.parseInt(queryParams.week);
+    }
+
+    if (moment().day() === 0) {
+      weekNumber += 1;
     }
 
     setWeek(weekNumber);
