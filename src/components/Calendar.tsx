@@ -8,7 +8,7 @@ import { useAppContext } from 'store';
 
 const Calendar: FC = () => {
   const {
-    state: { isLoadingTerms, occupiedTerms },
+    state: { isLoadingTerms, occupiedTerms, reservations },
   } = useAppContext();
   const { canGoPrev, weekDates, goToNextWeek, goToPreviousWeek } =
     useCalendar();
@@ -20,7 +20,11 @@ const Calendar: FC = () => {
         onPrevClick={goToPreviousWeek}
         canGoPrev={canGoPrev}
       />
-      <WeekDays dates={weekDates} occupiedItems={occupiedTerms} />
+      <WeekDays
+        dates={weekDates}
+        occupiedItems={occupiedTerms}
+        reservations={reservations}
+      />
       {isLoadingTerms && (
         <div className={style.loader}>
           <Spin />

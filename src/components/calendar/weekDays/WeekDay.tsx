@@ -3,15 +3,27 @@ import { FC } from 'react';
 import style from 'components/calendar/weekDays/weekDay/WeekDay.module.scss';
 import { useWeekDay } from './weekDay/WeekDay.hooks';
 import Term from 'components/Term';
+import { Reservation } from 'store';
 
 type Props = {
   date: string;
   dayNumber: number;
   occupiedItems: Moment[];
+  reservations: Reservation[];
 };
 
-const WeekDay: FC<Props> = ({ date, dayNumber, occupiedItems }) => {
-  const { terms, isClosed } = useWeekDay(date, dayNumber, occupiedItems);
+const WeekDay: FC<Props> = ({
+  date,
+  dayNumber,
+  occupiedItems,
+  reservations,
+}) => {
+  const { terms, isClosed } = useWeekDay(
+    date,
+    dayNumber,
+    occupiedItems,
+    reservations,
+  );
 
   return (
     <div className={style.item}>

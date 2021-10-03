@@ -8,9 +8,9 @@ export const validateCreateReservation = (
     occupiedItems: Moment[];
   },
 ) => {
-  if (reservations.reservations.some(item => {
-    return reservation.date === item.date
-  })) {
+  if (
+    reservations.reservations.some((item) => reservation.date === item.date)
+  ) {
     return 'You can not book more than 1 term per day.';
   }
 
@@ -18,21 +18,26 @@ export const validateCreateReservation = (
 
   if (
     reservations.reservations.some((item) => {
-      return reservation.start === item.start &&
+      return (
+        reservation.start === item.start &&
         reservation.end === item.end &&
-        reservation.date === item.date;
+        reservation.date === item.date
+      );
     })
   ) {
     return 'This term seems to be already occupied. Please, select another date and time.';
   }
 
-  if (reservations.occupiedItems.some(item => item.isBetween(
-    moment(`${reservation.date} ${reservation.start}`),
-    moment(`${reservation.date} ${reservation.end}`),
-  ))) {
+  if (
+    reservations.occupiedItems.some((item) =>
+      item.isBetween(
+        moment(`${reservation.date} ${reservation.start}`),
+        moment(`${reservation.date} ${reservation.end}`),
+      ),
+    )
+  ) {
     return 'This term seems to be already occupied. Please, select another date and time.';
   }
-
 
   return 'OK';
 };
