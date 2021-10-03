@@ -11,7 +11,7 @@ type Props = {
 };
 
 const WeekDay: FC<Props> = ({ date, dayNumber, occupiedItems }) => {
-  const { terms } = useWeekDay(date, dayNumber, occupiedItems);
+  const { terms, isClosed } = useWeekDay(date, dayNumber, occupiedItems);
 
   return (
     <div className={style.item}>
@@ -20,15 +20,21 @@ const WeekDay: FC<Props> = ({ date, dayNumber, occupiedItems }) => {
         <span>{moment(date).format('YYYY')}</span>
       </div>
       <div className={style.terms}>
-        {terms.map((term, index) => {
-          return (
-            <Term
-              key={`${term.start}-${term.end}-${index}`}
-              date={date}
-              term={term}
-            />
-          );
-        })}
+        {isClosed ? (
+          <div>Closed</div>
+        ) : (
+          <>
+            {terms.map((term, index) => {
+              return (
+                <Term
+                  key={`${term.start}-${term.end}-${index}`}
+                  date={date}
+                  term={term}
+                />
+              );
+            })}
+          </>
+        )}
       </div>
     </div>
   );
