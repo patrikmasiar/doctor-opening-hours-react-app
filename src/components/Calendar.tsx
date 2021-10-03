@@ -3,11 +3,13 @@ import { FC } from 'react';
 import { useCalendar } from 'components/calendar/Calendar.hooks';
 import CalendarHeader from 'components/calendar/CalendarHeader';
 import WeekDays from 'components/calendar/WeekDays';
-import { useTerms } from 'components/term/Term.hooks';
 import style from 'components/calendar/Calendar.module.scss';
+import { useAppContext } from 'store';
 
 const Calendar: FC = () => {
-  const { isLoading, occupiedItems } = useTerms();
+  const {
+    state: { isLoadingTerms, occupiedTerms },
+  } = useAppContext();
   const { canGoPrev, weekDates, goToNextWeek, goToPreviousWeek } =
     useCalendar();
 
@@ -18,8 +20,8 @@ const Calendar: FC = () => {
         onPrevClick={goToPreviousWeek}
         canGoPrev={canGoPrev}
       />
-      <WeekDays dates={weekDates} occupiedItems={occupiedItems} />
-      {isLoading && (
+      <WeekDays dates={weekDates} occupiedItems={occupiedTerms} />
+      {isLoadingTerms && (
         <div className={style.loader}>
           <Spin />
         </div>

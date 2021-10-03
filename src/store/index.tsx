@@ -1,9 +1,13 @@
-import React, { FC, useState, useContext } from 'react';
+import { generateAndLoadOccupiedTerms } from 'api/terms';
+import { Moment } from 'moment';
+import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 const AppContext = React.createContext<{
   state: {
     reservations: any[];
+    isLoadingTerms: boolean;
+    occupiedTerms: Moment[];
   };
   actions: {
     createReservation(reservation: {
@@ -26,10 +30,28 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
       start: string;
       end: string;
     }[];
+    isLoadingTerms: boolean;
+    occupiedTerms: Moment[];
   }>({
     reservations: [],
+    isLoadingTerms: false,
+    occupiedTerms: [],
   });
   const history = useHistory();
+
+  useEffect(() => {
+    loadOccupiedItems();
+  }, []);
+
+  const loadOccupiedItems = async () => {
+    setState((prevState) => ({ ...prevState, isLoadingTerms: true }));
+    const response = await generateAndLoadOccupiedTerms();
+    setState((prevState) => ({
+      ...prevState,
+      occupiedTerms: response,
+      isLoadingTerms: false,
+    }));
+  };
 
   const createReservation = (reservation: {
     date: string;
