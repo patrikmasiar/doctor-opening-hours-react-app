@@ -3,6 +3,7 @@ import classes from 'react-style-classes';
 import style from 'components/term/Term.module.scss';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { getQueryParameters } from 'utils/url';
 
 type Props = {
   term: any; // TODO: type
@@ -15,13 +16,15 @@ const Term: FC<Props> = ({ term, date }) => {
   const isDisabled =
     term.isOccupied || term.isLunchBreak || isInPast || isToday;
 
+  const {week} = getQueryParameters(['week']);
+
   return (
     <Link
       to={
         !term.isOccupied && !term.isLunchBreak
           ? {
               pathname: 'reservation',
-              search: `?date=${date}&start=${term.start}&end=${term.end}`,
+              search: `?week=${week}&date=${date}&start=${term.start}&end=${term.end}`,
             }
           : ''
       }

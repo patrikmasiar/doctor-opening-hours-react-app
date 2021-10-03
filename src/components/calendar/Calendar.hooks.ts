@@ -4,7 +4,7 @@ import { getDaysInWeek, getNumberOfTheWeek } from 'utils/dates';
 import { getQueryParameters, setQueryParameter } from 'utils/url';
 
 export const useCalendar = () => {
-  const [week, setWeek] = useState(0);
+  const [week, setWeek] = useState(getNumberOfTheWeek());
 
   useEffect(() => {
     initNumberOfTheWeek();

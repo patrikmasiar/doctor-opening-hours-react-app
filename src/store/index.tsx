@@ -1,4 +1,5 @@
 import React, { FC, useState, useContext } from 'react';
+import { useHistory } from 'react-router';
 
 const AppContext = React.createContext<{
   state: {
@@ -28,6 +29,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
   }>({
     reservations: [],
   });
+  const history = useHistory();
 
   const createReservation = (reservation: {
     date: string;
@@ -46,6 +48,8 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
         reservations,
       };
     });
+
+    history.goBack();
   };
 
   return (
