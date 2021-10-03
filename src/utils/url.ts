@@ -11,4 +11,18 @@ export const getQueryParameters = (
   });
 
   return parameters;
-}
+};
+
+const formatURLQuery = (query: string): string => {
+  return query.replace(/%2C/g, ',');
+};
+
+export const setQueryParameter = (name: string, value: any): void => {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  urlParams.set(name, value as string);
+
+  const newQuery = window.location.pathname + '?' + urlParams.toString();
+
+  window.history.replaceState(null, '', formatURLQuery(newQuery));
+};
