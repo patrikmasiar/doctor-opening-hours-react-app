@@ -3,7 +3,8 @@
 
 ## Gettings started with the project
 1. You have to run [NodeJS server](https://github.com/patrikmasiar/doctor-opening-hours-api) as API
-2. Run ReactJS project
+  1.1 Then the server URL should be: `http://localhost:3010`
+3. Run ReactJS project
 
 # Getting Started with Create React App
 
