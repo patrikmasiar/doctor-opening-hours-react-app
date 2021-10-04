@@ -1,6 +1,6 @@
 import { loadOccupiedItems as loadOccupiedItemsFromAPI } from 'api/terms';
 import { validateCreateReservation } from 'components/reservationForm/ReservationForm.utils';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
@@ -48,7 +48,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
 
     setState((prevState) => ({
       ...prevState,
-      occupiedTerms: response.data,
+      occupiedTerms: response.data.map((item) => moment(item)),
       isLoadingTerms: false,
     }));
   };

@@ -1,8 +1,5 @@
-import { Moment } from "moment";
-import { get } from "utils/client";
+import { get } from 'utils/client';
 
-
-
-export const loadOccupiedItems = (): Promise<{data: Moment[]}> => {
+export const loadOccupiedItems = (): Promise<{ data: string[] }> => {
   return get('occupied-terms');
 };
