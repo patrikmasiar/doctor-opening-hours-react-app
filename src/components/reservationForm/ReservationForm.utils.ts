@@ -14,8 +14,13 @@ export const validateCreateReservation = (
     return 'You can not book more than 1 term per day.';
   }
 
-  // TODO: WEEk terms validation
-  // 'You can not book more than 2 terms per week.'
+  if (
+    reservations.reservations.filter((item) => {
+      return moment(item.date).isoWeek() === moment(reservation.date).isoWeek();
+    }).length === 2
+  ) {
+    return 'You can not book more than 2 terms per week.';
+  }
 
   if (
     reservations.reservations.some((item) => {
