@@ -6,7 +6,7 @@ import moment from 'moment';
 import { getQueryParameters } from 'utils/url';
 
 type Props = {
-  term: any; // TODO: type
+  term: any;
   date: string;
 };
 
