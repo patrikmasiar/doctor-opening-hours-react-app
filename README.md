@@ -1,6 +1,10 @@
 # Doctor opening hours and booking - React application
 [![](https://github.com/patrikmasiar/doctor-opening-hours-react-app/workflows/Build/badge.svg)](https://github.com/patrikmasiar/doctor-opening-hours-react-app/actions)
 
+## Gettings started with the project
+1. You have to run [NodeJS server](https://github.com/patrikmasiar/doctor-opening-hours-api) as API
+2. Run ReactJS project
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
