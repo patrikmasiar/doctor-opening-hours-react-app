@@ -18,9 +18,7 @@ const CalendarHeader: FC<Props> = ({
 }) => {
   return (
     <div className={style.header}>
-      <span
-        style={{ fontWeight: 'bold', textTransform: 'uppercase', fontSize: 16 }}
-      >
+      <span className={style.headerTitle}>
         Calendar of the available terms
       </span>
       <div>
