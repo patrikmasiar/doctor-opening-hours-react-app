@@ -9,6 +9,7 @@ const DAYS = {
 }
 
 const config = {
+  BASE_URL: process.env.REACT_BASE_URL,
   API_URL: process.env.REACT_APP_API_URL,
   MAX_DAY_RESERVATIONS: 1,
   MAX_WEEK_RESERVATIONS: 2,

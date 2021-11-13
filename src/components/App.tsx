@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import { AppContextProvider } from 'store';
 import Breadcrumbs from 'components/Breadcrumbs';
+import config from 'config';
 
 import Main from 'pages/Main';
 import Reservation from 'pages/Reservation';
@@ -12,7 +13,7 @@ const { Header, Content, Footer } = Layout;
 
 const App: FC = () => {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename={config.BASE_URL}>
       <Layout>
         <Header className="header">Doctor opening hours</Header>
         <Breadcrumbs />
