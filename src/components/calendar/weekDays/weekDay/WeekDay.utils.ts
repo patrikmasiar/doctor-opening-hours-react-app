@@ -10,7 +10,7 @@ export const isDayClosed = (date: string) => {
     const day = moment(date).day();
 
     if (weekNumber % 2 === 0) {
-      return day === 0;
+      return day === config.DEFAULT_DAY_CLOSED;
     }
 
     return config.DEFAULT_CLOSED_DAYS.includes(day);
