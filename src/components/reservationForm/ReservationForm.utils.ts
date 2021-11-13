@@ -9,12 +9,16 @@ export const validateCreateReservation = (
     occupiedItems: Moment[];
   },
 ) => {
+  let isValid = true;
+  let message = 'OK';
+
   if (
     reservations.reservations.filter((item) => {
       return reservation.date === item.date;
-    }).length === 1
+    }).length === config.MAX_DAY_RESERVATIONS
   ) {
-    return `You can not book more than ${config.MAX_DAY_RESERVATIONS} term per day.`;
+    isValid = false;
+    message = `You can not book more than ${config.MAX_DAY_RESERVATIONS} term per day.`
   }
 
   if (
@@ -22,7 +26,8 @@ export const validateCreateReservation = (
       return moment(item.date).isoWeek() === moment(reservation.date).isoWeek();
     }).length === config.MAX_WEEK_RESERVATIONS
   ) {
-    return `You can not book more than ${config.MAX_WEEK_RESERVATIONS} terms per week.`;
+    isValid = false;
+    message = `You can not book more than ${config.MAX_WEEK_RESERVATIONS} terms per week.`
   }
 
   if (
@@ -34,7 +39,8 @@ export const validateCreateReservation = (
       );
     })
   ) {
-    return 'This term seems to be already occupied. Please, select another date and time.';
+    isValid = false;
+    message = 'This term seems to be already occupied. Please, select another date and time.';
   }
 
   if (
@@ -45,8 +51,12 @@ export const validateCreateReservation = (
       ),
     )
   ) {
-    return 'This term seems to be already occupied. Please, select another date and time.';
+    isValid = false;
+    message = 'This term seems to be already occupied. Please, select another date and time.';
   }
 
-  return 'OK';
+  return {
+    isValid,
+    message,
+  };
 };

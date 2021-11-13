@@ -19,8 +19,16 @@ const AppContext = React.createContext<{
   actions: {
     createReservation(reservation: Reservation): void;
   };
-  // @ts-ignore
-}>({});
+}>({
+  state: {
+    reservations: [],
+    isLoadingTerms: false,
+    occupiedTerms: [],
+  },
+  actions: {
+    createReservation: () => {},
+  },
+});
 
 type Props = {
   children: React.ReactNode;
@@ -56,12 +64,12 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
   const createReservation = (reservation: Reservation) => {
     const { reservations, occupiedTerms } = state;
 
-    const validationMessage = validateCreateReservation(reservation, {
+    const reservationValidation = validateCreateReservation(reservation, {
       reservations,
       occupiedItems: occupiedTerms,
     });
 
-    if (validationMessage === 'OK') {
+    if (reservationValidation.isValid) {
       setState((prevState) => {
         const reservations = [...prevState.reservations];
 
@@ -75,7 +83,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
 
       history.goBack();
     } else {
-      alert(validationMessage);
+      alert(reservationValidation.message);
     }
   };
 
