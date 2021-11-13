@@ -1,3 +1,4 @@
+import config from "config";
 import moment from "moment";
 import { getQueryParameters } from "utils/url";
 
@@ -12,7 +13,7 @@ export const isDayClosed = (date: string) => {
       return day === 0;
     }
 
-    return [6,0].includes(day);
+    return config.DEFAULT_CLOSED_DAYS.includes(day);
   }
 
   return false;

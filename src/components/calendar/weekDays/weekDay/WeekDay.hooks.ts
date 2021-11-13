@@ -1,3 +1,4 @@
+import config from 'config';
 import moment, { Moment } from 'moment';
 import { Reservation } from 'store';
 import { isDayClosed } from './WeekDay.utils';
@@ -21,10 +22,16 @@ export const useWeekDay = (
 
   const isLunchBreak = (start: string, end: string) => {
     if (isEven()) {
-      return start === '11:00' && end === '11:30';
+      return (
+        start === config.EVEN_DAY_LUNCH_BREAK.start &&
+        end === config.EVEN_DAY_LUNCH_BREAK.end
+      );
     }
 
-    return start === '16:00' && end === '16:30';
+    return (
+      start === config.ODD_DAY_LUCNH_BREAK.start &&
+      end === config.ODD_DAY_LUCNH_BREAK.end
+    );
   };
 
   const isClosed = () => {
@@ -33,8 +40,10 @@ export const useWeekDay = (
 
   const getAllDayTerms = () => {
     const times: any[] = [];
-    const start = isEven() ? 8 : 13;
-    const end = isEven() ? 14 : 19;
+    const start = isEven()
+      ? config.EVEN_DAY_HOURS.start
+      : config.ODD_DAY_HOURS.start;
+    const end = isEven() ? config.EVEN_DAY_HOURS.end : config.ODD_DAY_HOURS.end;
 
     for (var hour = start; hour <= end; hour++) {
       times.push([hour, 0]);
