@@ -7,11 +7,6 @@ export const useCalendar = () => {
   const [week, setWeek] = useState(getNumberOfTheWeek());
 
   useEffect(() => {
-    initNumberOfTheWeek();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const initNumberOfTheWeek = () => {
     const queryParams = getQueryParameters(['week']);
     let weekNumber = getNumberOfTheWeek();
 
@@ -25,7 +20,7 @@ export const useCalendar = () => {
 
     setWeek(weekNumber);
     setWeekToURL(weekNumber);
-  };
+  }, []);
 
   const goToNextWeek = () => {
     setWeek((prevWeek) => {
