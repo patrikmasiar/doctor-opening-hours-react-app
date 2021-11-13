@@ -13,50 +13,73 @@ export const validateCreateReservation = (
   let message = 'OK';
 
   if (
-    reservations.reservations.filter((item) => {
-      return reservation.date === item.date;
-    }).length === config.MAX_DAY_RESERVATIONS
+    canCreateReservationInSelectedDay(reservations.reservations, reservation)
   ) {
     isValid = false;
-    message = `You can not book more than ${config.MAX_DAY_RESERVATIONS} term per day.`
+    message = `You can not book more than ${config.MAX_DAY_RESERVATIONS} term per day.`;
   }
 
   if (
-    reservations.reservations.filter((item) => {
-      return moment(item.date).isoWeek() === moment(reservation.date).isoWeek();
-    }).length === config.MAX_WEEK_RESERVATIONS
+    canCreateReservationInSelectedWeek(reservations.reservations, reservation)
   ) {
     isValid = false;
-    message = `You can not book more than ${config.MAX_WEEK_RESERVATIONS} terms per week.`
+    message = `You can not book more than ${config.MAX_WEEK_RESERVATIONS} terms per week.`;
   }
 
-  if (
-    reservations.reservations.some((item) => {
-      return (
-        reservation.start === item.start &&
-        reservation.end === item.end &&
-        reservation.date === item.date
-      );
-    })
-  ) {
+  if (isTermAlreadyOccupied(reservations, reservation)) {
     isValid = false;
-    message = 'This term seems to be already occupied. Please, select another date and time.';
-  }
-
-  if (
-    reservations.occupiedItems.some((item) =>
-      item.isBetween(
-        moment(`${reservation.date} ${reservation.start}`),
-        moment(`${reservation.date} ${reservation.end}`),
-      ),
-    )
-  ) {
-    isValid = false;
-    message = 'This term seems to be already occupied. Please, select another date and time.';
+    message =
+      'This term seems to be already occupied. Please, select another date and time.';
   }
 
   return {
     isValid,
     message,
   };
+};
+
+const canCreateReservationInSelectedDay = (
+  reservations: Reservation[],
+  reservation: Reservation,
+) => {
+  return (
+    reservations.filter((item) => {
+      return reservation.date === item.date;
+    }).length === config.MAX_DAY_RESERVATIONS
+  );
+};
+
+const canCreateReservationInSelectedWeek = (
+  reservations: Reservation[],
+  reservation: Reservation,
+) => {
+  return (
+    reservations.filter((item) => {
+      return moment(item.date).isoWeek() === moment(reservation.date).isoWeek();
+    }).length === config.MAX_WEEK_RESERVATIONS
+  );
+};
+
+const isTermAlreadyOccupied = (
+  reservations: {
+    reservations: Reservation[];
+    occupiedItems: Moment[];
+  },
+  reservation: Reservation,
+) => {
+  return (
+    reservations.reservations.some((item) => {
+      return (
+        reservation.start === item.start &&
+        reservation.end === item.end &&
+        reservation.date === item.date
+      );
+    }) ||
+    reservations.occupiedItems.some((item) =>
+      item.isBetween(
+        moment(`${reservation.date} ${reservation.start}`),
+        moment(`${reservation.date} ${reservation.end}`),
+      ),
+    )
+  );
 };
