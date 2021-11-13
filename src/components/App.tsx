@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import 'styles/style.scss';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import { AppContextProvider } from 'store';
@@ -13,9 +14,9 @@ const App: FC = () => {
   return (
     <BrowserRouter basename="/">
       <Layout>
-        <Header style={{ color: '#fff' }}>Doctor opening hours</Header>
+        <Header className="header">Doctor opening hours</Header>
         <Breadcrumbs />
-        <Content style={{ padding: 50 }}>
+        <Content className="content">
           <AppContextProvider>
             <Switch>
               <Route path="/" component={Main} exact />

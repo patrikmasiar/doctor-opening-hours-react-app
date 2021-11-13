@@ -1,7 +1,8 @@
 import { Alert, Button } from 'antd';
 import moment from 'moment';
 import { FC } from 'react';
-import { useReservationForm } from './reservationForm/ReservationForm.hooks';
+import { useReservationForm } from 'components/reservationForm/ReservationForm.hooks';
+import style from 'components/reservationForm/ReservationForm.module.scss';
 
 const ReservationForm: FC = () => {
   const { date, start, end, submit } = useReservationForm();
@@ -14,7 +15,7 @@ const ReservationForm: FC = () => {
         )}, from ${start} to ${end}.`}
         type="info"
       />
-      <Button onClick={submit} type="primary" style={{ marginTop: 20 }}>
+      <Button onClick={submit} type="primary" className={style.button}>
         Confirm reservation
       </Button>
     </div>
