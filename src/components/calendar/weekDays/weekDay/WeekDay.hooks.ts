@@ -13,7 +13,6 @@ type DayTerm = {
 export const useWeekDay = (
   date: string,
   day: number,
-  occupiedItems: Moment[],
   reservations: Reservation[],
 ) => {
   const isEven = () => {
@@ -68,18 +67,11 @@ export const useWeekDay = (
       output.push({
         start: range[index],
         end: range[index + 1],
-        isOccupied: occupiedItems.some(
+        isOccupied: reservations.some(
           (item) =>
-            item.isBetween(
-              moment(`${date} ${range[index]}`),
-              moment(`${date} ${range[index + 1]}`),
-            ) ||
-            reservations.some(
-              (item) =>
-                item.date === date &&
-                item.start === range[index] &&
-                item.end === range[index + 1],
-            ),
+            item.date === date &&
+            item.start === range[index] &&
+            item.end === range[index + 1],
         ),
         isLunchBreak: isLunchBreak(range[index], range[index + 1]),
       });

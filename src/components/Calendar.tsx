@@ -8,7 +8,7 @@ import { useAppContext } from 'store';
 
 const Calendar: FC = () => {
   const {
-    state: { isLoadingTerms, occupiedTerms, reservations },
+    state: { isLoadingTerms, reservations },
   } = useAppContext();
   const { canGoPrev, weekDates, goToNextWeek, goToPreviousWeek } =
     useCalendar();
@@ -22,7 +22,6 @@ const Calendar: FC = () => {
       />
       <WeekDays
         dates={weekDates}
-        occupiedItems={occupiedTerms}
         reservations={reservations}
       />
       {isLoadingTerms && (

@@ -1,12 +1,11 @@
 import config from 'config';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import { Reservation } from 'store';
 
 export const validateCreateReservation = (
   reservation: Reservation,
   reservations: {
     reservations: Reservation[];
-    occupiedItems: Moment[];
   },
 ) => {
   let isValid = true;
@@ -63,7 +62,6 @@ const canCreateReservationInSelectedWeek = (
 const isTermAlreadyOccupied = (
   reservations: {
     reservations: Reservation[];
-    occupiedItems: Moment[];
   },
   reservation: Reservation,
 ) => {
@@ -74,12 +72,6 @@ const isTermAlreadyOccupied = (
         reservation.end === item.end &&
         reservation.date === item.date
       );
-    }) ||
-    reservations.occupiedItems.some((item) =>
-      item.isBetween(
-        moment(`${reservation.date} ${reservation.start}`),
-        moment(`${reservation.date} ${reservation.end}`),
-      ),
-    )
+    })
   );
 };

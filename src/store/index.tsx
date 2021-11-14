@@ -14,7 +14,6 @@ const AppContext = React.createContext<{
   state: {
     reservations: any[];
     isLoadingTerms: boolean;
-    occupiedTerms: Moment[];
   };
   actions: {
     createReservation(reservation: Reservation): void;
@@ -23,7 +22,6 @@ const AppContext = React.createContext<{
   state: {
     reservations: [],
     isLoadingTerms: false,
-    occupiedTerms: [],
   },
   actions: {
     createReservation: () => {},
@@ -38,11 +36,9 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
   const [state, setState] = useState<{
     reservations: Reservation[];
     isLoadingTerms: boolean;
-    occupiedTerms: Moment[];
   }>({
     reservations: [],
     isLoadingTerms: false,
-    occupiedTerms: [],
   });
   const history = useHistory();
 
@@ -56,17 +52,16 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
 
     setState((prevState) => ({
       ...prevState,
-      occupiedTerms: response.data.map((item) => moment(item)),
+      reservations: response.data,
       isLoadingTerms: false,
     }));
   };
 
   const createReservation = (reservation: Reservation) => {
-    const { reservations, occupiedTerms } = state;
+    const { reservations } = state;
 
     const reservationValidation = validateCreateReservation(reservation, {
       reservations,
-      occupiedItems: occupiedTerms,
     });
 
     if (reservationValidation.isValid) {

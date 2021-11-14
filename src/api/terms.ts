@@ -1,7 +1,7 @@
 import { Reservation } from 'store';
 import { get, post } from 'utils/client';
 
-export const loadReservations= (): Promise<{ data: string[] }> => {
+export const loadReservations= (): Promise<{ data: Reservation[] }> => {
   return get('reservation/all');
 };
 

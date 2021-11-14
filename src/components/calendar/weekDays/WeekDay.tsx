@@ -1,4 +1,4 @@
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import { FC } from 'react';
 import style from 'components/calendar/weekDays/weekDay/WeekDay.module.scss';
 import { useWeekDay } from './weekDay/WeekDay.hooks';
@@ -9,20 +9,17 @@ import { Alert } from 'antd';
 type Props = {
   date: string;
   dayNumber: number;
-  occupiedItems: Moment[];
   reservations: Reservation[];
 };
 
 const WeekDay: FC<Props> = ({
   date,
   dayNumber,
-  occupiedItems,
   reservations,
 }) => {
   const { terms, isClosed } = useWeekDay(
     date,
     dayNumber,
-    occupiedItems,
     reservations,
   );
 
