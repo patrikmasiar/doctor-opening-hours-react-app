@@ -36,7 +36,7 @@ const App: FC = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Github:
+            Github: @patrikmasiar
           </a>
         </Footer>
       </Layout>
