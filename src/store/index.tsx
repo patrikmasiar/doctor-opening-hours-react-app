@@ -1,4 +1,7 @@
-import { loadReservations } from 'api/terms';
+import {
+  loadReservations,
+  createReservation as createReservationAPI,
+} from 'api/terms';
 import { validateCreateReservation } from 'components/reservationForm/ReservationForm.utils';
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -56,7 +59,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
     }));
   };
 
-  const createReservation = (reservation: Reservation) => {
+  const createReservation = async (reservation: Reservation) => {
     const { reservations } = state;
 
     const reservationValidation = validateCreateReservation(reservation, {
@@ -64,16 +67,20 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
     });
 
     if (reservationValidation.isValid) {
-      setState((prevState) => {
-        const reservations = [...prevState.reservations];
+      const response = await createReservationAPI(reservation);
 
-        reservations.push(reservation);
+      if (response.data !== null) {
+        setState((prevState) => {
+          const reservations = [...prevState.reservations];
 
-        return {
-          ...prevState,
-          reservations,
-        };
-      });
+          reservations.push(reservation);
+
+          return {
+            ...prevState,
+            reservations,
+          };
+        });
+      }
 
       history.goBack();
     } else {
