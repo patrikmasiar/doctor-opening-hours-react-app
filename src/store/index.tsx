@@ -1,4 +1,4 @@
-import { loadOccupiedItems as loadOccupiedItemsFromAPI } from 'api/terms';
+import { loadReservations } from 'api/terms';
 import { validateCreateReservation } from 'components/reservationForm/ReservationForm.utils';
 import moment, { Moment } from 'moment';
 import React, { FC, useState, useContext, useEffect } from 'react';
@@ -52,7 +52,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
 
   const loadOccupiedItems = async () => {
     setState((prevState) => ({ ...prevState, isLoadingTerms: true }));
-    const response = await loadOccupiedItemsFromAPI();
+    const response = await loadReservations();
 
     setState((prevState) => ({
       ...prevState,
