@@ -1,6 +1,5 @@
 import { loadReservations } from 'api/terms';
 import { validateCreateReservation } from 'components/reservationForm/ReservationForm.utils';
-import moment, { Moment } from 'moment';
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 

@@ -1,5 +1,4 @@
 import config from 'config';
-import moment, { Moment } from 'moment';
 import { Reservation } from 'store';
 import { isDayClosed } from './WeekDay.utils';
 
