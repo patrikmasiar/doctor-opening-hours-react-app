@@ -11,3 +11,4 @@ const client = axios.create(config);
 client.interceptors.response.use(responseMiddleware);
 
 export const get = client.get;
+export const post = client.post;
