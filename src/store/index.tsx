@@ -1,7 +1,7 @@
 import {
   loadReservations,
   createReservation as createReservationAPI,
-} from 'api/terms';
+} from 'api/reservation';
 import { validateCreateReservation } from 'components/reservationForm/ReservationForm.utils';
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
