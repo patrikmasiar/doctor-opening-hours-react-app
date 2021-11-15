@@ -1,11 +1,11 @@
 import config from 'config';
 import moment from 'moment';
-import { Reservation } from 'store';
+import type { ReservationType } from 'store';
 
 export const validateCreateReservation = (
-  reservation: Reservation,
+  reservation: ReservationType,
   reservations: {
-    reservations: Reservation[];
+    reservations: ReservationType[];
   },
 ) => {
   let isValid = true;
@@ -38,8 +38,8 @@ export const validateCreateReservation = (
 };
 
 const canCreateReservationInSelectedDay = (
-  reservations: Reservation[],
-  reservation: Reservation,
+  reservations: ReservationType[],
+  reservation: ReservationType,
 ) => {
   return (
     reservations.filter((item) => {
@@ -49,8 +49,8 @@ const canCreateReservationInSelectedDay = (
 };
 
 const canCreateReservationInSelectedWeek = (
-  reservations: Reservation[],
-  reservation: Reservation,
+  reservations: ReservationType[],
+  reservation: ReservationType,
 ) => {
   return (
     reservations.filter((item) => {
@@ -61,9 +61,9 @@ const canCreateReservationInSelectedWeek = (
 
 const isTermAlreadyOccupied = (
   reservations: {
-    reservations: Reservation[];
+    reservations: ReservationType[];
   },
-  reservation: Reservation,
+  reservation: ReservationType,
 ) => {
   return (
     reservations.reservations.some((item) => {

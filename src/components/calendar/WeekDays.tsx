@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import WeekDay from 'components/calendar/weekDays/WeekDay';
-import { Reservation } from 'store';
+import type { ReservationType } from 'store';
 
 type Props = {
   dates: string[];
-  reservations: Reservation[];
+  reservations: ReservationType[];
 };
 
 const WeekDays: FC<Props> = ({ dates, reservations }) => {

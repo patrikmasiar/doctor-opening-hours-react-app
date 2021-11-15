@@ -1,12 +1,9 @@
-import {
-  loadReservations,
-  createReservation as createReservationAPI,
-} from 'api/reservation';
+import { Reservation } from 'api/reservation';
 import { validateCreateReservation } from 'components/reservationForm/ReservationForm.utils';
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
-export type Reservation = {
+export type ReservationType = {
   date: string;
   start: string;
   end: string;
@@ -18,7 +15,7 @@ const AppContext = React.createContext<{
     isLoadingTerms: boolean;
   };
   actions: {
-    createReservation(reservation: Reservation): void;
+    createReservation(reservation: ReservationType): void;
   };
 }>({
   state: {
@@ -36,7 +33,7 @@ type Props = {
 
 export const AppContextProvider: FC<Props> = ({ children }) => {
   const [state, setState] = useState<{
-    reservations: Reservation[];
+    reservations: ReservationType[];
     isLoadingTerms: boolean;
   }>({
     reservations: [],
@@ -50,7 +47,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
 
   const loadOccupiedItems = async () => {
     setState((prevState) => ({ ...prevState, isLoadingTerms: true }));
-    const response = await loadReservations();
+    const response = await Reservation.getAll();
 
     setState((prevState) => ({
       ...prevState,
@@ -59,7 +56,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
     }));
   };
 
-  const createReservation = async (reservation: Reservation) => {
+  const createReservation = async (reservation: ReservationType) => {
     const { reservations } = state;
 
     const reservationValidation = validateCreateReservation(reservation, {
@@ -67,7 +64,7 @@ export const AppContextProvider: FC<Props> = ({ children }) => {
     });
 
     if (reservationValidation.isValid) {
-      const response = await createReservationAPI(reservation);
+      const response = await Reservation.create(reservation);
 
       if (response.data !== null) {
         setState((prevState) => {

@@ -1,14 +1,15 @@
-import { Reservation } from 'store';
 import { get, post } from 'utils/client';
+import type { ReservationType } from 'store';
 
-export const loadReservations = (): Promise<{ data: Reservation[] }> => {
-  return get('reservation/all');
-};
-
-export const createReservation = (
-  reservation: Reservation,
-): Promise<{ data: Reservation }> => {
-  return post('reservation', null, {
-    params: reservation,
-  });
+export const Reservation = {
+  getAll: (): Promise<{ data: ReservationType[] }> => {
+    return get('reservation/all');
+  },
+  create: (
+    reservation: ReservationType,
+  ): Promise<{ data: ReservationType }> => {
+    return post('reservation', null, {
+      params: reservation,
+    });
+  },
 };

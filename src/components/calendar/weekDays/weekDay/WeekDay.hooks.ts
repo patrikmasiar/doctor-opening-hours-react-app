@@ -1,6 +1,6 @@
 import config from 'config';
-import { Reservation } from 'store';
 import { isDayClosed } from './WeekDay.utils';
+import type { ReservationType } from 'store';
 
 type DayTerm = {
   start: string;
@@ -12,7 +12,7 @@ type DayTerm = {
 export const useWeekDay = (
   date: string,
   day: number,
-  reservations: Reservation[],
+  reservations: ReservationType[],
 ) => {
   const isEven = () => {
     return day % 2 === 0;

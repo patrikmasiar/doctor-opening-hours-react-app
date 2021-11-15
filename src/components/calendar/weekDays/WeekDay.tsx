@@ -3,13 +3,13 @@ import { FC } from 'react';
 import style from 'components/calendar/weekDays/weekDay/WeekDay.module.scss';
 import { useWeekDay } from './weekDay/WeekDay.hooks';
 import Term from 'components/Term';
-import { Reservation } from 'store';
 import { Alert } from 'antd';
+import type { ReservationType } from 'store';
 
 type Props = {
   date: string;
   dayNumber: number;
-  reservations: Reservation[];
+  reservations: ReservationType[];
 };
 
 const WeekDay: FC<Props> = ({

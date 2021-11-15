@@ -5,11 +5,12 @@ import { Layout } from 'antd';
 import { AppContextProvider } from 'store';
 import Breadcrumbs from 'components/Breadcrumbs';
 import config from 'config';
+import Footer from 'components/Footer';
 
 import Main from 'pages/Main';
 import Reservation from 'pages/Reservation';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 const App: FC = () => {
   return (
@@ -25,20 +26,7 @@ const App: FC = () => {
             </Switch>
           </AppContextProvider>
         </Content>
-        <Footer>
-          Made with ❤️ by{' '}
-          <a href="https://patrikmasiar.com" target="_blank" rel="noreferrer">
-            Patrik Mäsiar
-          </a>
-          ,{' '}
-          <a
-            href="https://github.com/patrikmasiar"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Github: @patrikmasiar
-          </a>
-        </Footer>
+        <Footer />
       </Layout>
     </BrowserRouter>
   );
